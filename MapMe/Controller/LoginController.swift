@@ -22,6 +22,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
         super.viewDidLoad()
         
         loginButton.setTitle("Login",for: UIControlState.normal)
+        setUIEnabled(false)
         
         formatText(inputEmail)
         formatText(inputPassword)
@@ -29,6 +30,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
         
         errorView.text = "Let's get Mapped!"
         errorView.textAlignment = .center
+        errorView.isUserInteractionEnabled = false
         
         
     }
@@ -47,7 +49,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
                         if success
                         {
                      
-                            self.errorView.text = "Working: Be patient!"
+                            self.errorView.text = "Logging in. . . "
                             
                      let controller =   self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                             
@@ -55,10 +57,17 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
                         }
                         else
                         {
-                            self.errorView.text = error!
+                            self.errorView.text = error
                         }
             }
         }
    }
+    
+    class func sharedInstance() -> LoginController {
+        struct Singleton {
+            static var sharedInstance = LoginController()
+        }
+        return Singleton.sharedInstance
+    }
 }
 

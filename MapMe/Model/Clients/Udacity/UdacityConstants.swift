@@ -12,12 +12,10 @@ import Foundation
 extension UdacityClient
 {
     
- 
     struct User
     {
         static let account = "account"
         static let session = "session"
-        
         
     }
     

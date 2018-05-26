@@ -15,12 +15,29 @@ extension LoginController
     
     func textIsValid (_ textField: UITextField) -> Bool
     {
-        if textField.text != ""
+        if (textField.text?.characters.count as! Int) >= 6
         {
             return true
         }
         else
         {
+           errorView.text = "Please enter valid password."
+            return false
+        }
+    }
+    
+    func emailIsValid (_ textField: UITextField) -> Bool
+    {
+        if ((textField.text?.contains("@"))! && ((textField.text?.contains(".com"))! || (textField.text?.contains(".edu"))!))
+        {
+           
+            errorView.text = "Let's map the owner of \(inputEmail.text!)!"
+            return true
+        }
+            
+        else
+        {
+            errorView.text = "Email invalid"
             return false
         }
     }
@@ -36,7 +53,7 @@ extension LoginController
         }
         else
         {
-            loginButton.alpha = 0.5
+            loginButton.alpha = 0.3
         }
     }
     
@@ -51,7 +68,6 @@ extension LoginController
     {
         text.delegate = self
         
-        textFieldShouldReturn(text)        
     }
     
     func resignIfFirstResponder(_ textField: UITextField)
@@ -60,20 +76,32 @@ extension LoginController
         {
             textField.resignFirstResponder()
         }
+        
+        else if textField == inputEmail{
+            emailIsValid(textField)
+        }
+        else if textField == inputPassword{
+            textIsValid(textField)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         resignIfFirstResponder(textField)
+        checkLoginText()
         
         return true
     }
     
     func checkLoginText() {
         
-        if (textIsValid(inputEmail) && textIsValid(inputEmail))
+        if (emailIsValid(inputEmail) && textIsValid(inputPassword))
         {
-            loginButton.isEnabled = true
+           setUIEnabled(true)
+        }
+        else
+        {
+            setUIEnabled(false)
         }
     }
 }

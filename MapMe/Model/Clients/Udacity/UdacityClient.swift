@@ -11,10 +11,8 @@ import Foundation
 
 class UdacityClient: NSObject {
     
-
-
     
-    func postForAuth(_ username:String, _ password:String, _ completionHandler: @escaping (_ success: Bool, _ sessionID: String?, _ error: String?) -> Void) -> URLSessionTask
+    func postForAuth(_ username:String, _ password:String, _ completionHandler: @escaping (_ success: Bool, _ sessionID: String?, _ error: String?) -> Void)
     {
         //1. Set Parameters, ???
     
@@ -34,10 +32,8 @@ class UdacityClient: NSObject {
             //Check Error
             func sendError(_ error: String)
             {
-            completionHandler(false, nil, error)
-            print(error)
-            let userInfo = [NSLocalizedDescriptionKey : error]
-           
+                completionHandler(false, nil, error)
+                print(error)
             }
             
             //GUARD: Was there an error?
@@ -50,7 +46,7 @@ class UdacityClient: NSObject {
             //GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else
             {
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("Email & Password don't match any users.")
                 return
             }
             
@@ -94,7 +90,7 @@ class UdacityClient: NSObject {
         }
         
             task.resume()
-            return task
+
     }
     
     

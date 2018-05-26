@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +35,11 @@
                                 <rect key="frame" x="137" y="377" width="100" height="25"/>
                                 <color key="backgroundColor" red="0.049069717559999997" green="0.72706200600000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="S6w-zD-xZq"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="su7-q3-knv"/>
                                     <constraint firstAttribute="height" constant="25" id="uGv-wc-r1d"/>
+                                    <constraint firstAttribute="width" constant="100" id="zDb-Sp-8pe"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="zOT-xl-eTs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                 <state key="normal" title="Login">
@@ -51,10 +56,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alogonew.png" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-i0-Nnd">
+                                <rect key="frame" x="130" y="97" width="114" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="KVm-vI-lwa"/>
+                                    <constraint firstAttribute="width" constant="114" id="Q6t-je-mdv"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="109" id="cBS-pG-66Q"/>
+                                    <constraint firstAttribute="width" secondItem="fuU-i0-Nnd" secondAttribute="height" multiplier="114:109" id="r8X-E3-Cwz"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zlz-9r-hEl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="2v3-OM-uH6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IuP-Vx-t6i" secondAttribute="trailing" constant="68" id="Fxy-vo-NUs"/>
                             <constraint firstItem="HHD-dZ-Jcf" firstAttribute="leading" secondItem="IbM-bh-nds" secondAttribute="leading" id="II5-AM-12B"/>
                             <constraint firstItem="HHD-dZ-Jcf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="84" id="Lgt-s9-i0K"/>
@@ -63,10 +76,12 @@
                             <constraint firstItem="IbM-bh-nds" firstAttribute="centerX" secondItem="zlz-9r-hEl" secondAttribute="centerX" id="Ucj-su-gYj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IuP-Vx-t6i" secondAttribute="bottom" constant="114" id="VGD-5D-Ek2"/>
                             <constraint firstItem="IuP-Vx-t6i" firstAttribute="top" secondItem="zlz-9r-hEl" secondAttribute="bottom" constant="23" id="XBO-fW-s0s"/>
+                            <constraint firstItem="HHD-dZ-Jcf" firstAttribute="top" secondItem="fuU-i0-Nnd" secondAttribute="bottom" constant="70" id="blr-aW-rEe"/>
                             <constraint firstItem="HHD-dZ-Jcf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="256" id="ePu-dy-Kfr"/>
                             <constraint firstItem="zlz-9r-hEl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ggV-yy-UwL"/>
                             <constraint firstItem="zlz-9r-hEl" firstAttribute="top" secondItem="IbM-bh-nds" secondAttribute="bottom" constant="27" id="h2r-ep-aBr"/>
                             <constraint firstItem="IbM-bh-nds" firstAttribute="top" secondItem="HHD-dZ-Jcf" secondAttribute="bottom" constant="22" id="lEW-eP-ekE"/>
+                            <constraint firstItem="fuU-i0-Nnd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t0B-zF-Lrl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -79,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="166" y="134"/>
+            <point key="canvasLocation" x="165.59999999999999" y="133.5832083958021"/>
         </scene>
         <!--ListViewController-->
         <scene sceneID="wNz-Kh-0Pg">
@@ -89,9 +104,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-bo-Lib">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-bo-Lib">
                                 <rect key="frame" x="0.0" y="70" width="375" height="548"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="49" id="UHI-8J-QFA">
@@ -104,9 +118,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ca6-C6-PuF">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca6-C6-PuF">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="PostPin" image="map_pin_small" id="84L-vD-ZlL">
                                         <connections>
@@ -125,9 +138,18 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ca6-C6-PuF" firstAttribute="top" secondItem="jgm-jc-rAd" secondAttribute="top" id="9d0-Lk-3fa"/>
+                            <constraint firstItem="4hF-bo-Lib" firstAttribute="top" secondItem="ca6-C6-PuF" secondAttribute="bottom" constant="6" id="IHk-Cq-1wh"/>
+                            <constraint firstItem="ca6-C6-PuF" firstAttribute="trailing" secondItem="4hF-bo-Lib" secondAttribute="trailing" id="QXa-An-TJx"/>
+                            <constraint firstItem="ca6-C6-PuF" firstAttribute="leading" secondItem="4hF-bo-Lib" secondAttribute="leading" id="RoS-CU-74J"/>
+                            <constraint firstItem="4hF-bo-Lib" firstAttribute="bottom" secondItem="jgm-jc-rAd" secondAttribute="bottom" id="hzd-Tp-jQ4"/>
+                            <constraint firstAttribute="trailing" secondItem="ca6-C6-PuF" secondAttribute="trailing" id="q7H-mq-ojM"/>
+                            <constraint firstItem="ca6-C6-PuF" firstAttribute="leading" secondItem="ece-F8-Km2" secondAttribute="leading" id="qug-AB-8KE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jgm-jc-rAd"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" selectedImage="list_tab" id="ebr-xu-eiy"/>
+                    <tabBarItem key="tabBarItem" title="List" image="list_tab" id="ebr-xu-eiy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5D-dO-Hma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -191,13 +213,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xjU-nJ-SWy">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xjU-nJ-SWy">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5aL-kL-gMX">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aL-kL-gMX">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="PostPin" image="map_pin_small" id="5cK-us-zq1">
                                         <connections>
@@ -220,9 +240,18 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5aL-kL-gMX" firstAttribute="leading" secondItem="xjU-nJ-SWy" secondAttribute="leading" id="2ra-nO-W9U"/>
+                            <constraint firstItem="xjU-nJ-SWy" firstAttribute="top" secondItem="5aL-kL-gMX" secondAttribute="bottom" id="Qij-e7-7RO"/>
+                            <constraint firstItem="xjU-nJ-SWy" firstAttribute="bottom" secondItem="Tf3-PC-xCL" secondAttribute="bottom" id="ZDi-tK-DHE"/>
+                            <constraint firstItem="5aL-kL-gMX" firstAttribute="top" secondItem="Tf3-PC-xCL" secondAttribute="top" id="ZZT-RI-OwZ"/>
+                            <constraint firstItem="5aL-kL-gMX" firstAttribute="trailing" secondItem="xjU-nJ-SWy" secondAttribute="trailing" id="eb0-ux-xqF"/>
+                            <constraint firstItem="xjU-nJ-SWy" firstAttribute="leading" secondItem="Tf3-PC-xCL" secondAttribute="leading" id="meE-ts-5LP"/>
+                            <constraint firstItem="xjU-nJ-SWy" firstAttribute="trailing" secondItem="Tf3-PC-xCL" secondAttribute="trailing" id="spl-jY-Hyu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Tf3-PC-xCL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" selectedImage="map_tab small" id="67Z-zb-k5e"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map_tab small" id="67Z-zb-k5e"/>
                     <connections>
                         <outlet property="mapView" destination="xjU-nJ-SWy" id="VBP-as-kC3"/>
                     </connections>
@@ -252,6 +281,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="alogonew.png" width="2699" height="2803"/>
         <image name="list_tab" width="23" height="23"/>
         <image name="map_pin_small" width="22" height="28"/>
         <image name="map_tab small" width="22" height="28"/>
