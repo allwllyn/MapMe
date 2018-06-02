@@ -23,7 +23,12 @@ class MapViewController: UIViewController, MKMapViewDelegate
     }
     
     override func viewDidLoad() {
-
+        super .viewDidLoad()
+        
+        loadPins()
+        
+        
+        
     }
     
     
@@ -35,7 +40,12 @@ class MapViewController: UIViewController, MKMapViewDelegate
     @IBAction func refresh(_ sender: Any) {
     }
     
+    func loadPins()
     
+    {
+        
+        MapInteract.sharedInstance().locationsToMKAnnotation(mapView)
+    }
     
     
     

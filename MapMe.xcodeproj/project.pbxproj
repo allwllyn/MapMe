@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		430C4D8D20B9B7B30085F9C3 /* loginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C4D8C20B9B7B30085F9C3 /* loginExtension.swift */; };
+		430C4D9120BA48A30085F9C3 /* MapInteract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C4D9020BA48A30085F9C3 /* MapInteract.swift */; };
 		435D054420B1DFE30073BF4D /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D054320B1DFE30073BF4D /* GCDBlackBox.swift */; };
 		43CB86F620AA556A00D63038 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB86F520AA556A00D63038 /* AppDelegate.swift */; };
 		43CB86F820AA556A00D63038 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB86F720AA556A00D63038 /* LoginController.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		430C4D8C20B9B7B30085F9C3 /* loginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginExtension.swift; sourceTree = "<group>"; };
+		430C4D9020BA48A30085F9C3 /* MapInteract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteract.swift; sourceTree = "<group>"; };
 		435D054320B1DFE30073BF4D /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		43CB86F220AA556A00D63038 /* MapMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CB86F520AA556A00D63038 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,14 @@
 				430C4D8C20B9B7B30085F9C3 /* loginExtension.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		430C4D8F20BA48790085F9C3 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				430C4D9020BA48A30085F9C3 /* MapInteract.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		43CB86E920AA556A00D63038 = {
@@ -206,6 +216,7 @@
 			children = (
 				43CB874D20B084AA00D63038 /* ParseClient.swift */,
 				43CB875220B0865900D63038 /* ParseConstants.swift */,
+				430C4D8F20BA48790085F9C3 /* Map */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -367,6 +378,7 @@
 				43CB86F820AA556A00D63038 /* LoginController.swift in Sources */,
 				43CB875320B0865900D63038 /* ParseConstants.swift in Sources */,
 				43CB872720AA5AAA00D63038 /* MapViewController.swift in Sources */,
+				430C4D9120BA48A30085F9C3 /* MapInteract.swift in Sources */,
 				430C4D8D20B9B7B30085F9C3 /* loginExtension.swift in Sources */,
 				43CB86F620AA556A00D63038 /* AppDelegate.swift in Sources */,
 				43CB872C20AA624600D63038 /* UdacityClient.swift in Sources */,
