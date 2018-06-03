@@ -16,10 +16,11 @@ class MapInteract: NSObject
     
     var pinLocations = [MKPointAnnotation]()
     
+    var studentLocationArray = [StudentLocation]()
+    
 
-    func locationsToMKAnnotation(_ map: MKMapView)
+    func resultToStudent(_ completion: @escaping (_ success: Bool) -> Void)
     {
-        //pinLocations?.append(ParseClient.sharedInstance().studentLocations as! MKAnnotation)
         
         ParseClient.sharedInstance().getLocations()
             {
@@ -30,48 +31,73 @@ class MapInteract: NSObject
                         
                         var locationArray = ParseClient.sharedInstance().studentLocations!
                         print(locationArray.count)
-                                for dictionary in locationArray[0...2]
+                                for dictionary in locationArray
                                     {
-                                        print("- - - - - - -\n- - - - - - - ")
-                                        print(dictionary)
                                         
-                                        if dictionary["latitude"] == nil {
+                                        if dictionary["latitude"] == nil
+                                        {
                                             return
                                         }
                                         
-                                        let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                                        let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-            
-                                        let coordinate = CLLocationCoordinate2DMake(lat, long)
+                                    let newLocation = StudentLocation(dictionary)
                                         
-                                        let title = dictionary["firstName"]
+                                    self.studentLocationArray.append(newLocation)
                                         
-                                        let subTitle = dictionary["mediaURL"]
-            
-                                        let annotation = MKPointAnnotation()
-                                        annotation.coordinate = coordinate
-                                        annotation.title = title as? String
-                                        annotation.subtitle = subTitle as? String
-            
-                                        self.pinLocations.append(annotation)
-                                        print("- - - - - \n- - - - - \n- - - - - \n- - - - -")
-                                        print(self.pinLocations)
-                                        print("- - - - -\n- - - - - \n- - - - -")
-                                    }
-                        map.addAnnotations(self.pinLocations)
+                                        }
+                        completion(true)
                     }
             }
     }
     
-    class func sharedInstance() -> MapInteract {
-    
-    struct Singleton {
-    static var sharedInstance = MapInteract()
+    func dataToPins(_ completion: @escaping (_ success: Bool) -> Void)
+    {
+        
+        for student in studentLocationArray
+        {
+            let pin = MKPointAnnotation()
+            
+            let lat = CLLocationDegrees(student.latitude)
+            let lon = CLLocationDegrees(student.longitude)
+            let pinPoint = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            
+            pin.coordinate = pinPoint
+            pin.title = "\(student.firstName) \(student.lastName)"
+            pin.subtitle = student.mediaURL
+            
+            print(pin.title)
+            
+            self.pinLocations.append(pin)
+            
+        }
+        
+        completion(true)
+        
     }
+    
+    func mapPins(_ map: MKMapView)
+    {
+        resultToStudent()
+            { (success) in
+        
+                self.dataToPins()
+                    { (success) in
+                        if success
+                        {
+                            map.addAnnotations(self.pinLocations)
+                        }
+                    }
+            }
+    }
+    
+    class func sharedInstance() -> MapInteract
+    {
+        struct Singleton
+        {
+            static var sharedInstance = MapInteract()
+        }
     return Singleton.sharedInstance
     
     }
-    
     
     
 }

@@ -13,7 +13,7 @@ import CoreLocation
 
 
 
-class MapViewController: UIViewController, MKMapViewDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate
 {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -25,7 +25,7 @@ class MapViewController: UIViewController, MKMapViewDelegate
     override func viewDidLoad() {
         super .viewDidLoad()
         
-        loadPins()
+       dropPins(mapView)
         
         
         
@@ -35,19 +35,38 @@ class MapViewController: UIViewController, MKMapViewDelegate
     @IBAction func postPin(_ sender: Any) {
         
         
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "PostPinController")
+        
+        controller!.modalPresentationStyle = .fullScreen
+        
+       self.present(controller!, animated: true, completion: nil)
+        
     }
     
     @IBAction func refresh(_ sender: Any) {
-    }
-    
-    func loadPins()
-    
-    {
         
-        MapInteract.sharedInstance().locationsToMKAnnotation(mapView)
+        performUIUpdatesOnMain {
+          self.dropPins(self.mapView)
+        }
+        
+        
     }
     
     
+    func dropPins(_ map: MKMapView){
+        
+        MapInteract.sharedInstance().mapPins(map)
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.open(NSURL(string: toOpen)! as URL, options: [:], completionHandler: nil)
+            }
+        }
+    }
     
     
 }

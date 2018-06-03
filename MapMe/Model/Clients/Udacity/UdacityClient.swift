@@ -11,6 +11,8 @@ import Foundation
 
 class UdacityClient: NSObject {
     
+    var uniqueKey: String?
+    
     
     func postForAuth(_ username:String, _ password:String, _ completionHandler: @escaping (_ success: Bool, _ sessionID: String?, _ error: String?) -> Void)
     {
@@ -78,6 +80,10 @@ class UdacityClient: NSObject {
         
             let udacitySessionID = udacitySession[UdacityClient.Info.ID] as! String
             
+            let accountInfo = parsedResult[(UdacityClient.User.account)] as! NSDictionary
+            
+            self.uniqueKey = accountInfo[UdacityClient.Info.key] as! String
+            
             if udacitySessionID != nil
             {
             
@@ -94,9 +100,9 @@ class UdacityClient: NSObject {
     }
     
     
-    /*func getPublicInfo(completionHandlerForGet: @escaping (_ publicData: Data?,_ error: NSError?))
+    func getPublicInfo(_ key: String, _ completion: @escaping (_ publicInfo: NSDictionary,_ success: Bool) -> Void)
     {
-        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/3903878747")!)
+        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(key)")!)
         let session = URLSession.shared
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -104,7 +110,7 @@ class UdacityClient: NSObject {
             func sendError(_ error: String) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForGET(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+                
             }
             
             /* GUARD: Was there an error? */
@@ -129,9 +135,23 @@ class UdacityClient: NSObject {
             
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
+            
+            var parsedResult: AnyObject?
+            do
+            {
+            try parsedResult = JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! NSDictionary
+            }
+            catch
+            {
+                print("There was an error parsing the data")
+            }
+            
+            let publicUserInfo = parsedResult!["user"] as! NSDictionary
+            completion(publicUserInfo, true)
+            
         }
         task.resume()
-     }    */
+     }
     
     
     class func sharedInstance() -> UdacityClient {
