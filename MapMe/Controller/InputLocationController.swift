@@ -1,0 +1,69 @@
+//
+//  InputLocationController.swift
+//  MapMe
+//
+//  Created by Andrew Llewellyn on 6/3/18.
+//  Copyright © 2018 Andrew Llewellyn. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import MapKit
+import CoreLocation
+
+class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldDelegate
+{
+    
+    @IBOutlet weak var inputLocation: UITextField!
+    
+    @IBOutlet weak var submitButton: UIButton!
+    
+    @IBOutlet weak var instructionText: UITextView!
+    
+    var addressString: String?
+    
+    override func viewDidLoad() {
+        super .viewDidLoad()
+        
+        submitButton.isEnabled = false
+        submitButton.alpha = 0.5
+        inputLocation.delegate = self
+         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if inputLocation.text != "" {
+            submitButton.isEnabled = true
+            submitButton.alpha = 1.0
+        }
+        return true
+    }
+    
+    
+    func setUserLocation()
+    {
+       MapInteract.sharedInstance().userAddressString = inputLocation.text!
+        
+    }
+    
+    @IBAction func geocodeAddress()
+    {
+    
+        setUserLocation()
+        
+        let nextController = storyboard?.instantiateViewController(withIdentifier: "PostPinController")
+        
+        self.present(nextController!, animated: true, completion: nil
+        )
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}

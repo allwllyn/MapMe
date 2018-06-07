@@ -154,6 +154,8 @@ class UdacityClient: NSObject {
      }
     
     
+    
+    
     class func sharedInstance() -> UdacityClient {
         struct Singleton {
             static var sharedInstance = UdacityClient()

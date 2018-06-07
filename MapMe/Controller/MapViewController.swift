@@ -25,6 +25,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     override func viewDidLoad() {
         super .viewDidLoad()
         
+        
        dropPins(mapView)
         
         
@@ -35,7 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     @IBAction func postPin(_ sender: Any) {
         
         
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "PostPinController")
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "InputLocationController")
         
         controller!.modalPresentationStyle = .fullScreen
         

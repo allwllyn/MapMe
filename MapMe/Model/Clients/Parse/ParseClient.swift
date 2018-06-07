@@ -74,7 +74,7 @@ class ParseClient: NSObject
     }
 
     
-    func postLocation(_ firstName: String,_ lastName: String, _ uniqueKey: String, _ lat: Double, _ lon: Double, mapString: String, mediaURL: String)
+    func postLocation(_ firstName: String?,_ lastName: String?, _ uniqueKey: String?, _ lat: Double?, _ lon: Double?, mapString: String?, mediaURL: String?)
     {
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
@@ -94,17 +94,19 @@ class ParseClient: NSObject
         task.resume()
     }
     
-    func overwriteLocation()
+
+    
+    func updateLocation(_ firstName: String,_ lastName: String, _ uniqueKey: String, _ lat: Double, _ lon: Double, mapString: String, mediaURL: String)
     {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/8ZExGR5uX8"
-        let url = URL(string: urlString)
-        var request = URLRequest(url: url!)
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation/8ZExGR5uX8")!)
         request.httpMethod = "PUT"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(lat), \"longitude\": \(lon)}".data(using: .utf8)
+        
         let session = URLSession.shared
+        
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
                 return
@@ -118,12 +120,15 @@ class ParseClient: NSObject
     
     
     
+    
+    
     class func sharedInstance() -> ParseClient {
         struct Singleton {
             static var sharedInstance = ParseClient()
         }
         return Singleton.sharedInstance
     }
+    
     
     
 }

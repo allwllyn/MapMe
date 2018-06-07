@@ -17,32 +17,30 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     var firstName: String?
     let uniqueKey = UdacityClient.sharedInstance().uniqueKey
     
-    let manager = CLLocationManager()
-    
-    @IBOutlet weak var instructionText: UITextView!
-    
-    @IBOutlet weak var locationInput: UITextField!
-    
+  
     @IBOutlet weak var urlText: UITextField!
     
-    @IBOutlet weak var mapPreview: MKMapView!
+    @IBOutlet weak var previewMap: MKMapView!
     
     @IBOutlet weak var submitButton: UIButton!
     
-    var pinPreview = MKPointAnnotation()
+   var pinPreview = MapInteract.sharedInstance().pinPreview
     
-    let LocationManager = CLLocationManager()
-    let geoCoder = CLGeocoder()
+    let addressString = MapInteract.sharedInstance().userAddressString
+    
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
+        
     }
     
     override func viewDidLoad() {
         super .viewDidLoad()
         
-       // formatText(locationInput, startText: "Location")
-       // formatText(urlText, startText: "Your Web Link")
+      MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap)
+        
+       formatText(urlText, startText: "Your Web Link")
         
         setUserInfo()
     }
@@ -54,6 +52,13 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         text.textAlignment = .center
         text.font = UIFont(name: "Helvetica", size: 20.0)
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if urlText.text != "" {
+            submitButton.isEnabled = true
+        }
+        return true
     }
     
     func formatButton(_ button: UIButton)
@@ -74,39 +79,19 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func cityNameToLatLon(_ cityName: String, _ map: MKMapView){
-        
-        geoCoder.geocodeAddressString(cityName)
-        {
-        (placemarks, error) in
-                let placemark = placemarks
-                let location = placemark?.first?.location
-                let locaLocation = location?.coordinate
-        
-            self.pinPreview.coordinate = locaLocation!
-        }
-        
-        map.addAnnotation(pinPreview)
-    }
-    
-    
-    
     @IBAction func submitPin(_ sender: Any) {
         let mediaLink = urlText.text
-        let locationString = locationInput.text
-        let lat = pinPreview.coordinate.latitude
-        let lon = pinPreview.coordinate.longitude
+        let lat = pinPreview.coordinate.latitude as Double
+        let lon = pinPreview.coordinate.longitude as Double
         
-        ParseClient.sharedInstance().postLocation(lastName!, firstName!, uniqueKey!, lat, lon, mapString: locationString!, mediaURL: mediaLink!)
+        ParseClient.sharedInstance().postLocation(lastName!, firstName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
         
         self.dismiss(animated: true, completion: nil)
         
     }
     
     
-    
-    
-    
+
     
     
     

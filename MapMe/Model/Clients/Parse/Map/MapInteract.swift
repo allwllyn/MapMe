@@ -9,14 +9,25 @@
 import Foundation
 import MapKit
 import UIKit
+import CoreLocation
 
 class MapInteract: NSObject
 {
+    let LocationManager = CLLocationManager()
     
+    let geoCoder = CLGeocoder()
+    
+    var userInputLocation = MKPointAnnotation()
+    
+    var userPlacemark = CLPlacemark()
+    
+    var pinPreview = MKPointAnnotation()
     
     var pinLocations = [MKPointAnnotation]()
     
     var studentLocationArray = [StudentLocation]()
+    
+    var userAddressString: String?
     
 
     func resultToStudent(_ completion: @escaping (_ success: Bool) -> Void)
@@ -38,6 +49,10 @@ class MapInteract: NSObject
                                         {
                                             return
                                         }
+                                        else if dictionary["uniqueKey"] == nil
+                                        {
+                                            return
+                                        }
                                         
                                     let newLocation = StudentLocation(dictionary)
                                         
@@ -55,9 +70,16 @@ class MapInteract: NSObject
         for student in studentLocationArray
         {
             let pin = MKPointAnnotation()
-            
-            let lat = CLLocationDegrees(student.latitude)
-            let lon = CLLocationDegrees(student.longitude)
+            var lat: Double = 0.0
+            var lon: Double = 0.0
+            if student.latitude != nil
+            {
+                lat = CLLocationDegrees(student.latitude!)
+            }
+            if student.longitude != nil
+            {
+                lon = CLLocationDegrees(student.longitude!)
+            }
             let pinPoint = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             pin.coordinate = pinPoint
@@ -87,6 +109,21 @@ class MapInteract: NSObject
                         }
                     }
             }
+    }
+    
+    func cityNameToLatLon(_ cityName: String, _ map: MKMapView){
+        
+        geoCoder.geocodeAddressString(cityName)
+        {
+            (placemarks, error) in
+            let placemark = placemarks
+            let location = placemark?.first?.location
+            let locaLocation = location?.coordinate
+            
+            self.pinPreview.coordinate = locaLocation!
+        }
+        
+        map.addAnnotation(pinPreview)
     }
     
     class func sharedInstance() -> MapInteract
