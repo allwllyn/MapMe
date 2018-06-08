@@ -51,7 +51,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
                      
                             self.errorView.text = "Logging in. . . "
                             
-                     let controller =   self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+                     let controller =   self.storyboard?.instantiateViewController(withIdentifier: "NavController") as! UINavigationController
                             
                            self.present(controller, animated: true, completion: nil)
                         }
