@@ -16,11 +16,11 @@ class WebController: UIViewController {
     
     @IBOutlet weak var webViewer: WKWebView!
     
-    var request = SurfClient.sharedInstance().requestPage
+    var request = SurfClient.sharedInstance().requestPage!
     
     override func viewWillAppear(_ animated: Bool) {
         
-    webViewer.load(request!)
+    webViewer.load(request)
         
     }
     

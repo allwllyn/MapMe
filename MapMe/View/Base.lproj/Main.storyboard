@@ -134,6 +134,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="List" image="list_tab" id="ebr-xu-eiy"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="listView" destination="ggF-fF-QS8" id="prP-Tk-4uj"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2048.8000000000002" y="465.51724137931041"/>
@@ -157,10 +160,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="WTQ-US-KYN" firstAttribute="bottom" secondItem="639-ic-njC" secondAttribute="bottom" id="41T-Zu-57e"/>
+                            <constraint firstItem="WTQ-US-KYN" firstAttribute="top" secondItem="639-ic-njC" secondAttribute="top" id="JHh-Wp-YaX"/>
+                            <constraint firstItem="WTQ-US-KYN" firstAttribute="leading" secondItem="639-ic-njC" secondAttribute="leading" id="Pmg-dq-QBG"/>
                             <constraint firstItem="WTQ-US-KYN" firstAttribute="trailing" secondItem="639-ic-njC" secondAttribute="trailing" id="QWW-6L-cHU"/>
                             <constraint firstItem="WTQ-US-KYN" firstAttribute="top" secondItem="639-ic-njC" secondAttribute="top" id="T2S-iP-jSN"/>
                             <constraint firstItem="WTQ-US-KYN" firstAttribute="leading" secondItem="639-ic-njC" secondAttribute="leading" id="fZV-VY-02l"/>
                             <constraint firstItem="WTQ-US-KYN" firstAttribute="bottom" secondItem="639-ic-njC" secondAttribute="bottom" id="gwx-hI-fTF"/>
+                            <constraint firstItem="WTQ-US-KYN" firstAttribute="trailing" secondItem="639-ic-njC" secondAttribute="trailing" id="oEt-Ls-jhx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="639-ic-njC"/>
                     </view>

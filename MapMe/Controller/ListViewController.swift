@@ -18,7 +18,9 @@ class ListViewController: UITableViewController
     
     
     override func viewWillAppear(_ animated: Bool) {
-       
+        
+        listView.reloadData()
+        
     }
     
     @IBAction func postPin(_ sender: Any) {
@@ -55,13 +57,23 @@ class ListViewController: UITableViewController
         
         let studentItem = MapInteract.sharedInstance().studentLocationArray[(indexPath as NSIndexPath).row]
         
-        SurfClient.sharedInstance().studentURL = studentItem.mediaURL
+        if studentItem.mediaURL != nil
+        {
+        
+        SurfClient.sharedInstance().studentURL = studentItem.mediaURL!
         
         SurfClient.sharedInstance().setRequest()
         
+        print(SurfClient.sharedInstance().requestPage!)
+            
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "WebController") as! WebController
         
         self.navigationController!.pushViewController(detailController, animated: true)
+        }
+        else
+        {
+            return
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -69,12 +81,14 @@ class ListViewController: UITableViewController
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for:indexPath)
         
         let studentItem = MapInteract.sharedInstance().studentLocationArray[(indexPath as NSIndexPath).row]
+        
+        let name = "\(studentItem.firstName!) \(studentItem.lastName!)" 
     
-        cell.textLabel?.text = studentItem.firstName
+        cell.textLabel?.text = name
         cell.detailTextLabel?.text = studentItem.mapString
         
-        cell.textLabel?.font = UIFont(name: "Menlo", size: 16.0)
-        cell.detailTextLabel?.font = UIFont(name: "Menlo", size: 16.0)
+        cell.textLabel?.font = UIFont(name: "Menlo", size: 12.0)
+        cell.detailTextLabel?.font = UIFont(name: "Menlo", size: 12.0)
         
         return cell
     }
