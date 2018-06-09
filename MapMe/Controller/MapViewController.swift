@@ -13,34 +13,32 @@ import CoreLocation
 
 
 
-class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate, UITableViewDelegate
 {
     
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
+        
+        dropPins(mapView)
     }
     
     override func viewDidLoad() {
         super .viewDidLoad()
         
-        
        dropPins(mapView)
-        
-        
         
     }
     
     
     @IBAction func postPin(_ sender: Any) {
         
-        
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "NavController")
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "InputLocationController")
         
         controller!.modalPresentationStyle = .fullScreen
         
-       self.present(controller!, animated: true, completion: nil)
+       self.navigationController?.pushViewController(controller!, animated: true)
         
     }
     
@@ -49,8 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
         performUIUpdatesOnMain {
           self.dropPins(self.mapView)
         }
-        
-        
+                
     }
     
     

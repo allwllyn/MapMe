@@ -24,23 +24,30 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var submitButton: UIButton!
     
-   var pinPreview = MapInteract.sharedInstance().pinPreview
+    @IBOutlet weak var urlInstruct: UITextView!
+ 
+    
+    
+    
+    var pinPreview = MapInteract.sharedInstance().pinPreview
     
     let addressString = MapInteract.sharedInstance().userAddressString
     
- 
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
+        formatText(urlText, startText: "Your Web Link")
         
     }
+    
     
     override func viewDidLoad() {
         super .viewDidLoad()
         
       MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap)
         
-       formatText(urlText, startText: "Your Web Link")
+       
         
         setUserInfo()
     }
@@ -48,9 +55,15 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     func formatText(_ text: UITextField, startText: String)
     {
         text.placeholder = startText
-        text.alpha = 0.5
         text.textAlignment = .center
         text.font = UIFont(name: "Helvetica", size: 20.0)
+        urlText.allowsEditingTextAttributes = true
+        urlText.isUserInteractionEnabled = true
+        
+        urlInstruct.font = UIFont(name: "Menlo", size: 24.0)
+        urlInstruct.isUserInteractionEnabled = false
+        urlInstruct.allowsEditingTextAttributes = false
+        urlInstruct.text = "Does this look right?"
         
     }
     
@@ -84,7 +97,7 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         let lat = pinPreview.coordinate.latitude as Double
         let lon = pinPreview.coordinate.longitude as Double
         
-        ParseClient.sharedInstance().postLocation(lastName!, firstName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
+        ParseClient.sharedInstance().postLocation(firstName!, lastName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
         
         self.navigationController?.popToRootViewController(animated: true)
         

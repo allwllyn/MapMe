@@ -83,10 +83,10 @@ class MapInteract: NSObject
             let pinPoint = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             pin.coordinate = pinPoint
-            pin.title = "\(student.firstName) \(student.lastName)"
+            pin.title = "\(student.firstName!) \(student.lastName!)"
             pin.subtitle = student.mediaURL
             
-            print(pin.title)
+            print(pin.title!)
             
             self.pinLocations.append(pin)
             

@@ -25,6 +25,8 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
     override func viewDidLoad() {
         super .viewDidLoad()
         
+        formatInstruction()
+        
         submitButton.isEnabled = false
         submitButton.alpha = 0.5
         inputLocation.delegate = self
@@ -54,13 +56,20 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
         let nextController = storyboard?.instantiateViewController(withIdentifier: "PostPinController")
         
         self.navigationController?.pushViewController(nextController!, animated: true)
-        
-        
-        
-        
+    
     }
     
-    
+    func formatInstruction() {
+        
+        instructionText.text = "Where are you?"
+        instructionText.font = UIFont(name: "Menlo", size: 24.0)
+        instructionText.textAlignment = .center
+        instructionText.allowsEditingTextAttributes = false
+        instructionText.isUserInteractionEnabled = false
+        
+        inputLocation.placeholder = "City"
+        
+    }
     
     
     
