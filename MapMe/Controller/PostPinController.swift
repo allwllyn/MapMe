@@ -47,8 +47,6 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         
       MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap)
         
-       
-        
         setUserInfo()
     }
     

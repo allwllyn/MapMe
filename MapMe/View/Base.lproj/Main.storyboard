@@ -105,9 +105,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xCu-kD-GBk">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem title="Logout" id="dKu-cZ-hua">
+                                    <connections>
+                                        <action selector="logout:" destination="ePH-yx-XKB" id="vs6-1j-DnH"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="3PR-IR-1hG"/>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="rPh-7U-ejC"/>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="yly-5O-lEl"/>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Bmb-ut-w2y"/>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ELL-z8-lh1"/>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RFe-iD-NyA"/>
+                                <barButtonItem title="Item" image="map_pin_small" id="lV6-c0-Ltw">
+                                    <connections>
+                                        <action selector="postPin:" destination="ePH-yx-XKB" id="hgh-DG-kiW"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StudentCell" textLabel="X2c-dN-lgH" detailTextLabel="7iA-tr-2pv" rowHeight="49" style="IBUITableViewCellStyleValue1" id="UHI-8J-QFA">
-                                <rect key="frame" x="0.0" y="28" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="locationLabel" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UHI-8J-QFA" id="gUt-kc-eOt">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>

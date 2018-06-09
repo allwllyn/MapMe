@@ -17,6 +17,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
 {
     
     @IBOutlet weak var mapView: MKMapView!
+    let uniqueKey = UdacityClient.sharedInstance().uniqueKey
+    
+    var studentArray = MapInteract.sharedInstance().studentLocationArray
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
@@ -66,5 +69,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
         }
     }
     
+    func showAlert()
+    {
+        let alertController = UIAlertController(title: "Alert", message:
+            "You're already mapped!", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
+   
 }

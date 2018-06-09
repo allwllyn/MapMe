@@ -35,6 +35,12 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        clearText()
+        errorView.text = "Let's get Mapped!"
+        setUIEnabled(false)
+    }
+    
     @IBAction func pressLogin(_ sender: Any)
     {
         let userName = inputEmail.text!
@@ -62,6 +68,12 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
             }
         }
    }
+    
+    func clearText()
+    {
+        inputEmail.text = nil
+        inputPassword.text = nil
+    }
     
     class func sharedInstance() -> LoginController {
         struct Singleton {

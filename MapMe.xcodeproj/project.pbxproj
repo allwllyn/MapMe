@@ -221,7 +221,7 @@
 			children = (
 				43CB875120B085A500D63038 /* Udacity */,
 				43CB875020B0859C00D63038 /* Parse */,
-				43F7FA8120CC6339001AAB5D /* SurfClient.swift */,
+				43F7FA8320CC8B39001AAB5D /* WebContent */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -251,6 +251,14 @@
 				43CB875D20B0A61000D63038 /* alogonew.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		43F7FA8320CC8B39001AAB5D /* WebContent */ = {
+			isa = PBXGroup;
+			children = (
+				43F7FA8120CC6339001AAB5D /* SurfClient.swift */,
+			);
+			path = WebContent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

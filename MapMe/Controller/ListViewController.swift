@@ -93,6 +93,16 @@ class ListViewController: UITableViewController
         return cell
     }
     
-  
+    @IBAction func logout(_ sender: Any) {
+        
+        getOut()
+        
+    }
+    
+    func getOut(){
+        UdacityClient.sharedInstance().endSession()
+        
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
 
 }
