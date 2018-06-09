@@ -53,8 +53,8 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
         
         let nextController = storyboard?.instantiateViewController(withIdentifier: "PostPinController")
         
-        self.present(nextController!, animated: true, completion: nil
-        )
+        self.navigationController?.pushViewController(nextController!, animated: true)
+        
         
         
         

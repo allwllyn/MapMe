@@ -36,7 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     @IBAction func postPin(_ sender: Any) {
         
         
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "InputLocationController")
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "NavController")
         
         controller!.modalPresentationStyle = .fullScreen
         

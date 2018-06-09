@@ -86,7 +86,7 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         
         ParseClient.sharedInstance().postLocation(lastName!, firstName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
         
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
         
     }
     
