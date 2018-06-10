@@ -80,6 +80,7 @@ class ListViewController: UITableViewController
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for:indexPath)
         
+        
         let studentItem = MapInteract.sharedInstance().studentLocationArray[(indexPath as NSIndexPath).row]
         
         let name = "\(studentItem.firstName!) \(studentItem.lastName!)" 
@@ -92,6 +93,7 @@ class ListViewController: UITableViewController
         
         return cell
     }
+    
     
     @IBAction func logout(_ sender: Any) {
         
