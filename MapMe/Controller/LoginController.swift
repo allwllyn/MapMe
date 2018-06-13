@@ -28,11 +28,10 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
         formatText(inputPassword)
         inputPassword.isSecureTextEntry = true
         
+        
         errorView.text = "Let's get Mapped!"
         errorView.textAlignment = .center
         errorView.isUserInteractionEnabled = false
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +67,14 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
             }
         }
    }
+    
+
+    @IBAction func activateLogin(_ sender: Any) {
+        
+        setUIEnabled(true)
+        
+    }
+    
     
     func clearText()
     {

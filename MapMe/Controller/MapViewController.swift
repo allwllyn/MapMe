@@ -47,6 +47,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     
     @IBAction func refresh(_ sender: Any) {
         
+        MapInteract.sharedInstance().studentLocationArray = []
+        
         performUIUpdatesOnMain {
           self.dropPins(self.mapView)
         }

@@ -35,6 +35,7 @@ class ListViewController: UITableViewController
     
     @IBAction func refresh(_ sender: Any)
     {
+        MapInteract.sharedInstance().studentLocationArray = []
         
         performUIUpdatesOnMain
             {
