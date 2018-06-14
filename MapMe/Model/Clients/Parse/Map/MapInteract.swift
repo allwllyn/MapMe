@@ -11,7 +11,7 @@ import MapKit
 import UIKit
 import CoreLocation
 
-class MapInteract: NSObject
+class MapInteract: NSObject, MKMapViewDelegate
 {
     let LocationManager = CLLocationManager()
     
@@ -43,22 +43,15 @@ class MapInteract: NSObject
                         var locationArray = ParseClient.sharedInstance().studentLocations!
                         print(locationArray.count)
                                 for dictionary in locationArray
-                                    {
-                                        
-                                        if dictionary["latitude"] == nil
+                                    {                                
+                                      if dictionary["latitude"] != nil
                                         {
-                                            return
+                                            let newLocation = StudentLocation(dictionary)
+                                            
+                                            self.studentLocationArray.append(newLocation)
                                         }
-                                        else if dictionary["uniqueKey"] == nil
-                                        {
-                                            return
-                                        }
-                                        
-                                    let newLocation = StudentLocation(dictionary)
-                                        
-                                    self.studentLocationArray.append(newLocation)
-                                        
-                                        }
+                                    }
+                        print("completion true")
                         completion(true)
                     }
             }
@@ -66,30 +59,38 @@ class MapInteract: NSObject
     
     func dataToPins(_ completion: @escaping (_ success: Bool) -> Void)
     {
+        print("starting but not working")
         
         for student in studentLocationArray
         {
+            print("-----------------hello i am running---------------------")
+            
             let pin = MKPointAnnotation()
             var lat: Double = 0.0
             var lon: Double = 0.0
+            
+            
+            
             if student.latitude != nil
             {
                 lat = CLLocationDegrees(student.latitude!)
-            }
-            if student.longitude != nil
-            {
                 lon = CLLocationDegrees(student.longitude!)
             }
+            else
+            {
+                return
+            }
+            
             let pinPoint = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             pin.coordinate = pinPoint
             pin.title = "\(student.firstName!) \(student.lastName!)"
             pin.subtitle = student.mediaURL
             
+        
             print(pin.title!)
             
             self.pinLocations.append(pin)
-            
         }
         
         completion(true)
@@ -98,16 +99,19 @@ class MapInteract: NSObject
     
     func mapPins(_ map: MKMapView)
     {
+        print("something happening -----------------------------------------------------------------------------")
         resultToStudent()
             { (success) in
-        
-                self.dataToPins()
+                if success
+                {
+                    self.dataToPins()
                     { (success) in
                         if success
                         {
                             map.addAnnotations(self.pinLocations)
                         }
                     }
+                }
             }
     }
     
@@ -125,6 +129,8 @@ class MapInteract: NSObject
         
         map.addAnnotation(pinPreview)
     }
+    
+
     
     class func sharedInstance() -> MapInteract
     {

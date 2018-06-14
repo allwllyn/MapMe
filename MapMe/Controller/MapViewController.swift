@@ -16,22 +16,54 @@ import CoreLocation
 class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate, UITableViewDelegate
 {
     
+
     @IBOutlet weak var mapView: MKMapView!
+    
+    
     let uniqueKey = UdacityClient.sharedInstance().uniqueKey
     
     var studentArray = MapInteract.sharedInstance().studentLocationArray
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
-        
-        dropPins(mapView)
+      
     }
     
     override func viewDidLoad() {
         super .viewDidLoad()
+        mapView.delegate = self
+      //formatAlert()
+        dropPins(mapView)
         
-       dropPins(mapView)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor pin: MKAnnotation) -> MKAnnotationView? {
         
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: pin, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = pin
+        }
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            if let toOpen = view.annotation?.subtitle! {
+                app.open(NSURL(string: toOpen)! as URL, options: [:], completionHandler: nil)
+            }
+        }
     }
     
     
@@ -47,38 +79,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     
     @IBAction func refresh(_ sender: Any) {
         
-        MapInteract.sharedInstance().studentLocationArray = []
-        
         performUIUpdatesOnMain {
           self.dropPins(self.mapView)
         }
                 
     }
     
+    let alert = UIAlertController(title: "Alert Test", message: "Have you been alerted?", preferredStyle: .alert)
     
-    func dropPins(_ map: MKMapView){
-        
+    
+    func formatAlert()
+    {
+    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+    
+    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+    
+    self.present(alert, animated: true)
+    }
+    
+    func dropPins(_ map: MKMapView)
+    {
         MapInteract.sharedInstance().mapPins(map)
     }
     
+   
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(NSURL(string: toOpen)! as URL, options: [:], completionHandler: nil)
-            }
-        }
-    }
-    
-    func showAlert()
-    {
-        let alertController = UIAlertController(title: "Alert", message:
-            "You're already mapped!", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default,handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
+
     
    
 }
