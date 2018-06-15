@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 import MapKit
 import CoreLocation
+import WebKit
 
 
 
-class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate, UITableViewDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, UITabBarControllerDelegate, UITableViewDelegate, UIWebViewDelegate
 {
     
 
@@ -34,40 +35,47 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
         mapView.delegate = self
       //formatAlert()
         dropPins(mapView)
-        
     }
     
-    func mapView(_ mapView: MKMapView, viewFor pin: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor view: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: pin, reuseIdentifier: reuseId)
+        if pinView == nil
+        {
+            pinView = MKPinAnnotationView(annotation: view, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
         }
-        else {
-            pinView!.annotation = pin
+            
+        else
+        {
+            pinView!.annotation = view
         }
         
         return pinView
     }
     
-    func mapView(_ mapView: MKMapView, view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        if control == view.rightCalloutAccessoryView
+        {
             let app = UIApplication.shared
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            if let toOpen = view.annotation?.subtitle! {
+            if let toOpen = view.annotation?.subtitle!
+            {
                 app.open(NSURL(string: toOpen)! as URL, options: [:], completionHandler: nil)
             }
         }
     }
     
     
-    @IBAction func postPin(_ sender: Any) {
+    @IBAction func postPin(_ sender: Any)
+    {
         
         let controller = self.storyboard?.instantiateViewController(withIdentifier: "InputLocationController")
         
@@ -77,8 +85,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
         
     }
     
-    @IBAction func refresh(_ sender: Any) {
-        
+    @IBAction func refresh(_ sender: Any)
+    {
+        mapView.removeAnnotations(mapView.annotations)
         performUIUpdatesOnMain {
           self.dropPins(self.mapView)
         }
