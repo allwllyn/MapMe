@@ -25,6 +25,8 @@ class MapInteract: NSObject, MKMapViewDelegate
     
     var pinLocations = [MKPointAnnotation]()
     
+  
+    
     var studentLocationArray = [StudentLocation]()
     
     var userAddressString: String?
@@ -111,6 +113,7 @@ class MapInteract: NSObject, MKMapViewDelegate
                         {
                             map.addAnnotations(self.pinLocations)
                         }
+                        
                     }
                 }
             }
