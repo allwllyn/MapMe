@@ -82,11 +82,6 @@ class LoginController: UIViewController, UITextFieldDelegate, UITabBarDelegate
         inputPassword.text = nil
     }
     
-    class func sharedInstance() -> LoginController {
-        struct Singleton {
-            static var sharedInstance = LoginController()
-        }
-        return Singleton.sharedInstance
-    }
+    
 }
 
