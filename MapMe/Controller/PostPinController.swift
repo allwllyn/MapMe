@@ -52,8 +52,6 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         
         MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap, self, navigationController!)
         
-       
-        
         setUserInfo()
     }
     
@@ -64,7 +62,7 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         text.font = UIFont(name: "Helvetica", size: 20.0)
         urlText.allowsEditingTextAttributes = true
         urlText.isUserInteractionEnabled = true
-        
+        urlText.delegate = self
         urlInstruct.font = UIFont(name: "Menlo", size: 24.0)
         urlInstruct.isUserInteractionEnabled = false
         urlInstruct.allowsEditingTextAttributes = false
@@ -73,9 +71,11 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         if urlText.text != "" {
             submitButton.isEnabled = true
         }
+        resignIfFirstResponder(textField)
         return true
     }
     

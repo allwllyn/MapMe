@@ -125,8 +125,8 @@ class ParseClient: NSObject
 
     
 
-    
-    func updateLocation(_ firstName: String,_ lastName: String, _ uniqueKey: String, _ lat: Double, _ lon: Double, mapString: String, mediaURL: String)
+    // MARK: Update existing location : NOT IMPLEMENTED
+   /* func updateLocation(_ firstName: String,_ lastName: String, _ uniqueKey: String, _ lat: Double, _ lon: Double, mapString: String, mediaURL: String)
     {
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation/8ZExGR5uX8")!)
         request.httpMethod = "PUT"
@@ -144,7 +144,7 @@ class ParseClient: NSObject
             print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()
-    }
+    }*/
     
     
     class func sharedInstance() -> ParseClient {

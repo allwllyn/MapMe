@@ -13,6 +13,7 @@
 		437FA83820C349E400783A6D /* PostPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FA83720C349E400783A6D /* PostPinController.swift */; };
 		437FA83A20C3772700783A6D /* PostPinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FA83920C3772700783A6D /* PostPinExtension.swift */; };
 		437FA83C20C4DD0100783A6D /* InputLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FA83B20C4DD0100783A6D /* InputLocationController.swift */; };
+		43AF7CD020D5A1B900A26631 /* inputLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AF7CCF20D5A1B900A26631 /* inputLocationExtension.swift */; };
 		43CB86F620AA556A00D63038 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB86F520AA556A00D63038 /* AppDelegate.swift */; };
 		43CB86F820AA556A00D63038 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB86F720AA556A00D63038 /* LoginController.swift */; };
 		43CB86FB20AA556A00D63038 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CB86F920AA556A00D63038 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		437FA83720C349E400783A6D /* PostPinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPinController.swift; sourceTree = "<group>"; };
 		437FA83920C3772700783A6D /* PostPinExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPinExtension.swift; sourceTree = "<group>"; };
 		437FA83B20C4DD0100783A6D /* InputLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLocationController.swift; sourceTree = "<group>"; };
+		43AF7CCF20D5A1B900A26631 /* inputLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputLocationExtension.swift; sourceTree = "<group>"; };
 		43CB86F220AA556A00D63038 /* MapMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CB86F520AA556A00D63038 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43CB86F720AA556A00D63038 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				430C4D8C20B9B7B30085F9C3 /* loginExtension.swift */,
 				437FA83920C3772700783A6D /* PostPinExtension.swift */,
+				43AF7CCF20D5A1B900A26631 /* inputLocationExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				435D054420B1DFE30073BF4D /* GCDBlackBox.swift in Sources */,
 				43CB874E20B084AA00D63038 /* ParseClient.swift in Sources */,
 				43CB86F820AA556A00D63038 /* LoginController.swift in Sources */,
+				43AF7CD020D5A1B900A26631 /* inputLocationExtension.swift in Sources */,
 				43CB875320B0865900D63038 /* ParseConstants.swift in Sources */,
 				43CB872720AA5AAA00D63038 /* MapViewController.swift in Sources */,
 				430C4D9120BA48A30085F9C3 /* MapInteract.swift in Sources */,

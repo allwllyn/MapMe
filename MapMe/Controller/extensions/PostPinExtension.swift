@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 extension PostPinController
 {
@@ -37,6 +37,14 @@ extension PostPinController
     }
     
     
+    func resignIfFirstResponder(_ textField: UITextField)
+    {
+        if textField.isFirstResponder
+        {
+            textField.resignFirstResponder()
+        }
+        
+    }
     
     
     

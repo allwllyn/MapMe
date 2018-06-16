@@ -45,6 +45,7 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
             mapButton.isEnabled = true
             mapButton.alpha = 1.0
         }
+        resignIfFirstResponder(textField)
         return true
     }
     
