@@ -58,22 +58,14 @@ class ListViewController: UITableViewController
         
         let studentItem = MapInteract.sharedInstance().studentLocationArray[(indexPath as NSIndexPath).row]
         
-        if studentItem.mediaURL != nil
+        if studentItem.mediaURL != nil{
+        
+        let app = UIApplication.shared
+        
+        if let toOpen = studentItem.mediaURL
         {
-        
-        SurfClient.sharedInstance().studentURL = studentItem.mediaURL!
-        
-        SurfClient.sharedInstance().setRequest()
-        
-        print(SurfClient.sharedInstance().requestPage!)
-            
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "WebController") as! WebController
-        
-        self.navigationController!.pushViewController(detailController, animated: true)
+            app.open(NSURL(string: toOpen)! as URL, options: [:], completionHandler: nil)
         }
-        else
-        {
-            return
         }
     }
     

@@ -27,11 +27,11 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var urlInstruct: UITextView!
  
     
-    
-    
     var pinPreview = MapInteract.sharedInstance().pinPreview
     
     let addressString = MapInteract.sharedInstance().userAddressString
+    
+    let locations = MapInteract.sharedInstance().studentLocationArray
     
     
     
@@ -45,7 +45,14 @@ class PostPinController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super .viewDidLoad()
         
-      MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap)
+        previewMap.removeAnnotations(previewMap.annotations)
+        submitButton.setTitle("Submit", for: .normal)
+        submitButton.isEnabled = false
+        submitButton.alpha = 0.5
+        
+        MapInteract.sharedInstance().cityNameToLatLon(addressString!, previewMap, self, navigationController!)
+        
+       
         
         setUserInfo()
     }
@@ -94,15 +101,21 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         let mediaLink = urlText.text
         let lat = pinPreview.coordinate.latitude as Double
         let lon = pinPreview.coordinate.longitude as Double
+        var alreadyMapped: Bool = false
         
-        ParseClient.sharedInstance().postLocation(firstName!, lastName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
+      
+            ParseClient.sharedInstance().postLocation(firstName!, lastName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
         
         self.navigationController?.popToRootViewController(animated: true)
         
     }
     
     
-
+    @IBAction func inputLink(_ sender: UITextField) {
+        submitButton.alpha = 1.0
+        submitButton.isEnabled = true
+    }
+    
     
     
     

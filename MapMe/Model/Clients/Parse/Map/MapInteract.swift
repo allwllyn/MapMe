@@ -29,9 +29,15 @@ class MapInteract: NSObject, MKMapViewDelegate
     
     var userAddressString: String?
     
+    var activitySpin = UIActivityIndicatorView()
+    
+     let alert = UIAlertController(title: "Error", message: "That didn't quite work. Go back and try something a little different.", preferredStyle: .alert)
+    
+    
 
     func resultToStudent(_ completion: @escaping (_ success: Bool) -> Void)
     {
+        studentLocationArray = []
         
         ParseClient.sharedInstance().getLocations()
             {
@@ -63,13 +69,9 @@ class MapInteract: NSObject, MKMapViewDelegate
         
         for student in studentLocationArray
         {
-            print("-----------------hello i am running---------------------")
-            
             let pin = MKPointAnnotation()
             var lat: Double = 0.0
             var lon: Double = 0.0
-            
-            
             
             if student.latitude != nil
             {
@@ -99,7 +101,6 @@ class MapInteract: NSObject, MKMapViewDelegate
     
     func mapPins(_ map: MKMapView)
     {
-        print("something happening -----------------------------------------------------------------------------")
         resultToStudent()
             { (success) in
                 if success
@@ -115,22 +116,62 @@ class MapInteract: NSObject, MKMapViewDelegate
             }
     }
     
-    func cityNameToLatLon(_ cityName: String, _ map: MKMapView){
+    func cityNameToLatLon(_ cityName: String, _ map: MKMapView, _ view: UIViewController, _ nav: UINavigationController){
+        
         
         geoCoder.geocodeAddressString(cityName)
         {
+    
             (placemarks, error) in
             let placemark = placemarks
-            let location = placemark?.first?.location
-            let locaLocation = location?.coordinate
-            
-            self.pinPreview.coordinate = locaLocation!
+            if placemark != nil
+                {
+                    let location = placemark?.first?.location
+                
+                    let locaLocation = location?.coordinate
+                
+                    self.pinPreview.coordinate = locaLocation!
+                    
+                     map.setRegion(MKCoordinateRegion(center: self.pinPreview.coordinate, span: MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0)), animated: true)
+                }
+            else
+            {
+              self.formatAlert(view, nav)
+        
+            }
         }
         
         map.addAnnotation(pinPreview)
     }
     
-
+    func showActivity(_ view: UIView) {
+        activitySpin = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activitySpin.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
+        activitySpin.startAnimating()
+        view.addSubview(activitySpin)
+    }
+    
+    func formatAlert(_ view: UIViewController, _ nav: UINavigationController)
+    {
+        
+        let backAction = UIAlertAction(title: "Back", style: .default)
+        {
+            UIAlertAction in
+            nav.popViewController(animated: true)
+            self.alert.dismiss(animated: false, completion: nil)
+            }
+        
+        if alert.actions == []
+        {
+            alert.addAction(backAction)
+        }
+        view.present(self.alert, animated: true, completion: nil)
+    }
+    
+    func dropPins(_ map: MKMapView)
+    {
+        MapInteract.sharedInstance().mapPins(map)
+    }
     
     class func sharedInstance() -> MapInteract
     {
@@ -141,6 +182,7 @@ class MapInteract: NSObject, MKMapViewDelegate
     return Singleton.sharedInstance
     
     }
-    
+
+
     
 }

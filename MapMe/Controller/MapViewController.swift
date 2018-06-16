@@ -27,6 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITabBarController
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
+        
+        dropPins(mapView)
       
     }
     

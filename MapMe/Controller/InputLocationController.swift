@@ -16,7 +16,7 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
     
     @IBOutlet weak var inputLocation: UITextField!
     
-    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     
     @IBOutlet weak var instructionText: UITextView!
     
@@ -27,16 +27,23 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
         
         formatInstruction()
         
-        submitButton.isEnabled = false
-        submitButton.alpha = 0.5
+        mapButton.setTitle("Map", for: .normal)
+        mapButton.isEnabled = false
+        mapButton.alpha = 0.5
         inputLocation.delegate = self
          
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(true)
+        inputLocation.text = ""
+        formatInstruction()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if inputLocation.text != "" {
-            submitButton.isEnabled = true
-            submitButton.alpha = 1.0
+            mapButton.isEnabled = true
+            mapButton.alpha = 1.0
         }
         return true
     }
@@ -44,18 +51,21 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
     
     func setUserLocation()
     {
+    
        MapInteract.sharedInstance().userAddressString = inputLocation.text!
-        
     }
     
     @IBAction func geocodeAddress()
     {
     
+      //  MapInteract.sharedInstance().showActivity(self.view)
+        
         setUserLocation()
         
         let nextController = storyboard?.instantiateViewController(withIdentifier: "PostPinController")
         
         self.navigationController?.pushViewController(nextController!, animated: true)
+        
     
     }
     
@@ -68,10 +78,15 @@ class InputLocationController: UIViewController, MKMapViewDelegate, UITextFieldD
         instructionText.isUserInteractionEnabled = false
         
         inputLocation.placeholder = "City"
+        inputLocation.isUserInteractionEnabled = true
         
     }
     
-    
+    @IBAction func typeLocation(_ sender: Any) {
+        
+        mapButton.alpha = 1.0
+        mapButton.isEnabled = true
+    }
     
     
     

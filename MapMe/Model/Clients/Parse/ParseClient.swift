@@ -84,15 +84,45 @@ class ParseClient: NSObject
         request.httpBody = "{\"uniqueKey\": \"\(uniqueKey!)\", \"firstName\": \"\(firstName!)\", \"lastName\": \"\(lastName!)\",\"mapString\": \"\(mapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(lat!), \"longitude\": \(lon!)}".data(using: .utf8)
         
         let session = URLSession.shared
-        
-        let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error…
+        let task = session.dataTask(with: request)
+        {
+            data, response, error in
+            
+            //Check Error
+            func sendError(_ error: String)
+            {
+                print(error)
+                
+            }
+            
+            //GUARD: Was there an error?
+            guard (error == nil) else
+            {
+                sendError("There was an error with your request: \(error!)")
                 return
             }
-            print(String(data: data!, encoding: .utf8)!)
+            
+            //GUARD: Did we get a successful 2XX response?
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else
+            {
+                sendError("Status code returned other than 2XX, \((response as? HTTPURLResponse)?.statusCode)")
+                return
+            }
+            
+            //GUARD: Was there any data returned?
+            guard let data = data else
+            {
+                sendError("No data was returned by the request!")
+                return
+            }
+            // 5-6. Parse the data and use the data
+            
+            print(String(data: data, encoding: .utf8)!)
+            
         }
         task.resume()
     }
+
     
 
     
@@ -115,11 +145,6 @@ class ParseClient: NSObject
         }
         task.resume()
     }
-    
-    
-    
-    
-    
     
     
     class func sharedInstance() -> ParseClient {
