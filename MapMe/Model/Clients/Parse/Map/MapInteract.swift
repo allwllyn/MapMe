@@ -27,7 +27,7 @@ class MapInteract: NSObject, MKMapViewDelegate
     
   
     
-    var studentLocationArray = [StudentLocation]()
+    var studentLocationArray = [StudentInformation]()
     
     var userAddressString: String?
     
@@ -54,7 +54,7 @@ class MapInteract: NSObject, MKMapViewDelegate
                                     {                                
                                       if dictionary["latitude"] != nil
                                         {
-                                            let newLocation = StudentLocation(dictionary)
+                                            let newLocation = StudentInformation(dictionary)
                                             
                                             self.studentLocationArray.append(newLocation)
                                         }

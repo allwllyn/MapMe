@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 
-struct StudentLocation
+struct StudentInformation
 {
     var createdAt: String?
     var firstName: String?
