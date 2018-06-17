@@ -82,7 +82,7 @@ class MapInteract: NSObject, MKMapViewDelegate
             }
             else
             {
-                return
+                continue
             }
             
             let pinPoint = CLLocationCoordinate2D(latitude: lat, longitude: lon)
