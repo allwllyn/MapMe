@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import UIKit
 import CoreLocation
+import CoreGraphics
 
 class MapInteract: NSObject, MKMapViewDelegate
 {
@@ -25,13 +26,12 @@ class MapInteract: NSObject, MKMapViewDelegate
     
     var pinLocations = [MKPointAnnotation]()
     
-  
+    var activitySpin: UIActivityIndicatorView = UIActivityIndicatorView()
     
     var studentLocationArray = [StudentInformation]()
     
     var userAddressString: String?
     
-    var activitySpin = UIActivityIndicatorView()
     
      let alert = UIAlertController(title: "Error", message: "That didn't quite work. Go back and try something a little different.", preferredStyle: .alert)
     
@@ -121,6 +121,7 @@ class MapInteract: NSObject, MKMapViewDelegate
     
     func cityNameToLatLon(_ cityName: String, _ map: MKMapView, _ view: UIViewController, _ nav: UINavigationController){
         
+        showActivityIndicator(view.view)
         
         geoCoder.geocodeAddressString(cityName)
         {
@@ -145,14 +146,9 @@ class MapInteract: NSObject, MKMapViewDelegate
         }
         
         map.addAnnotation(pinPreview)
+        removeActivityIndicator(view.view)
     }
     
-    func showActivity(_ view: UIView) {
-        activitySpin = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activitySpin.frame = CGRect(x: 0, y: 0, width: 46, height: 46)
-        activitySpin.startAnimating()
-        view.addSubview(activitySpin)
-    }
     
     func formatAlert(_ view: UIViewController, _ nav: UINavigationController)
     {
@@ -175,6 +171,22 @@ class MapInteract: NSObject, MKMapViewDelegate
     {
         MapInteract.sharedInstance().mapPins(map)
     }
+    
+    func showActivityIndicator(_ view: UIView) {
+        
+        activitySpin.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
+        activitySpin.center = view.center
+        activitySpin.hidesWhenStopped = true
+        activitySpin.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.white
+        view.addSubview(activitySpin)
+        activitySpin.startAnimating()
+    }
+    
+    func removeActivityIndicator(_ view: UIView) {
+        activitySpin.removeFromSuperview()
+    }
+    
     
     class func sharedInstance() -> MapInteract
     {
