@@ -104,7 +104,7 @@ class PostPinController: UIViewController, UITextFieldDelegate {
         var alreadyMapped: Bool = false
         
       
-            ParseClient.sharedInstance().postLocation(firstName!, lastName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!)
+        ParseClient.sharedInstance().postLocation(firstName!, lastName!, uniqueKey!, lat, lon, mapString: addressString!, mediaURL: mediaLink!, self, navigationController!)
         
         self.navigationController?.popToRootViewController(animated: true)
         

@@ -15,6 +15,8 @@ class ParseClient: NSObject
 
     var studentLocations: [[String:AnyObject]]?
     
+     let alert = UIAlertController(title: "Error", message: "Please check you Network Connection.", preferredStyle: .alert)
+    
     func getLocations(_ completionHandler: @escaping (_ success: Bool) -> Void)
     {
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?order=-updatedAt&limit=100")!)
@@ -74,7 +76,7 @@ class ParseClient: NSObject
     }
 
     
-    func postLocation(_ firstName: String?,_ lastName: String?, _ uniqueKey: String?, _ lat: Double?, _ lon: Double?, mapString: String?, mediaURL: String?)
+    func postLocation(_ firstName: String?,_ lastName: String?, _ uniqueKey: String?, _ lat: Double?, _ lon: Double?, mapString: String?, mediaURL: String?, _ view: UIViewController, _ nav: UINavigationController)
     {
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
@@ -92,7 +94,7 @@ class ParseClient: NSObject
             func sendError(_ error: String)
             {
                 print(error)
-                
+                self.formatAlert(view, nav)
             }
             
             //GUARD: Was there an error?
@@ -146,6 +148,23 @@ class ParseClient: NSObject
         task.resume()
     }*/
     
+    
+    func formatAlert(_ view: UIViewController, _ nav: UINavigationController)
+    {
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default)
+        {
+            UIAlertAction in
+            nav.popToRootViewController(animated: true)
+            self.alert.dismiss(animated: false, completion: nil)
+        }
+        
+        if alert.actions == []
+        {
+            alert.addAction(okayAction)
+        }
+        view.present(self.alert, animated: true, completion: nil)
+    }
     
     class func sharedInstance() -> ParseClient {
         struct Singleton {

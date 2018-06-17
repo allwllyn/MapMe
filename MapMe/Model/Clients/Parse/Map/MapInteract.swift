@@ -36,7 +36,6 @@ class MapInteract: NSObject, MKMapViewDelegate
      let alert = UIAlertController(title: "Error", message: "That didn't quite work. Go back and try something a little different.", preferredStyle: .alert)
     
     
-
     func resultToStudent(_ completion: @escaping (_ success: Bool) -> Void)
     {
         studentLocationArray = []
